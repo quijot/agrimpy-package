@@ -10,7 +10,7 @@ with open('requirements.txt', 'r') as fh:
 
 setup(
     name='agrimpy',
-    version='0.0.2',
+    version='0.0.3',
     author='Santiago Pestarini',
     author_email='santiago@pestarini.com.ar',
     packages=['agrimpy'],

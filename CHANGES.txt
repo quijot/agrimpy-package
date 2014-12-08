@@ -1,3 +1,4 @@
+v0.0.3, 08 dic 2014 -- Reemplazo de numpy por math.
 v0.0.2, 08 dic 2014 -- Fix de las dependencias.
                        Mueve el archivo de requerimientos.
                        Hay un cast para asegurar el tipo de datos en geod_proy.py
