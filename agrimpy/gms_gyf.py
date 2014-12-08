@@ -4,7 +4,11 @@
 # Funciones de conversión entre (grados, minutos, segundos) sexagesimales y
 # grados y fracción.
 
-from numpy import sign, trunc, abs
+from math import copysign, trunc
+
+
+def sign(x):
+    return copysign(1, x)
 
 
 def gms2gyf(grados, minutos=0, segundos=0):
