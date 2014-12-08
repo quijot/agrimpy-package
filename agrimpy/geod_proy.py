@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+﻿#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 import pyproj
@@ -76,29 +76,29 @@ def geod_proy(coord_file, proj, file_ext, inv, sep=','):
         file_out.write('#id, E (m),\tN (m)\n')
     # recorrer archivo, transformar coordenadas y escribir archivo de salida
     for entry in file_in:
-      if not entry.startswith('#') and entry.strip() != '' \
+        if not entry.startswith('#') and entry.strip() != '' \
         and entry.find(sep) != -1:
-          coord_id, coord_in1, coord_in2 = entry.split(sep)
-          # tratamiento especial previo a la transformación
-          if not inv:
-              g1, m1, s1 = coord_in1.strip().split(' ')
-              g2, m2, s2 = coord_in2.strip().split(' ')
-              coord_in1 = gms2gyf(int(g1), int(m1), float(s1))
-              coord_in2 = gms2gyf(int(g2), int(m2), float(s2))
-          # transformación de las coordenadas
-          coord_out1, coord_out2 = proj(coord_in1, coord_in2, inverse=inv)
-          # tratamiento especial posterior a la transformación
-          if inv:
-              g1, m1, s1 = gyf2gms(coord_out1)
-              g2, m2, s2 = gyf2gms(coord_out2)
-              coord_out1 = str(g1) + ' ' + str(m1) + ' ' + str(s1)
-              coord_out2 = str(g2) + ' ' + str(m2) + ' ' + str(s2)
-          else:
-              coord_out1 = round(coord_out1, 3)
-              coord_out2 = round(coord_out2, 3)
-          # escribir al archivo de salida las coordenadas transformadas
-          file_out.write(str(coord_id) + sep + str(coord_out1) \
-            + sep + str(coord_out2) + '\n')
+            coord_id, coord_in1, coord_in2 = entry.split(sep)
+            # tratamiento especial previo a la transformación
+            if not inv:
+                g1, m1, s1 = coord_in1.strip().split(' ')
+                g2, m2, s2 = coord_in2.strip().split(' ')
+                coord_in1 = gms2gyf(int(g1), int(m1), float(s1))
+                coord_in2 = gms2gyf(int(g2), int(m2), float(s2))
+            # transformación de las coordenadas
+            coord_out1, coord_out2 = proj(float(coord_in1), float(coord_in2), inverse=inv)
+            # tratamiento especial posterior a la transformación
+            if inv:
+                g1, m1, s1 = gyf2gms(coord_out1)
+                g2, m2, s2 = gyf2gms(coord_out2)
+                coord_out1 = str(g1) + ' ' + str(m1) + ' ' + str(s1)
+                coord_out2 = str(g2) + ' ' + str(m2) + ' ' + str(s2)
+            else:
+                coord_out1 = round(coord_out1, 3)
+                coord_out2 = round(coord_out2, 3)
+            # escribir al archivo de salida las coordenadas transformadas
+            file_out.write(str(coord_id) + sep + str(coord_out1) \
+              + sep + str(coord_out2) + '\n')
     # cerrar los archivos
     file_in.close()
     file_out.close()
