@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-def toDXF(ixyz, dxf_file, layer='Puntos', layer_id='Puntos_ID'):
+def toDXF(ixyz, dxf_file, layer='Puntos', layer_id='Puntos_ID', layer_h='Cotas', label_size='10'):
     """
     Toma una lista de coordenadas xyz = [(x1,y1,z1), (x2,y2,z2), ... ] y genera
     un archivo formato DXF con nombre dxf_file con los puntos correspondientes
@@ -11,15 +11,21 @@ def toDXF(ixyz, dxf_file, layer='Puntos', layer_id='Puntos_ID'):
     pf.write('  0\nSECTION\n  2\nENTITIES\n')
     for p in ixyz:
         pf.write('  0\nPOINT\n  8\n' + layer + 
-                 '\n 10\n' + str(p[1]) + 
-                 '\n 20\n' + str(p[2]) + 
-                 '\n 30\n' + str(p[3]) +
+                 '\n 10\n' + str(p[1]) + ##
+                 '\n 20\n' + str(p[2]) + ## coord
+                 '\n 30\n' + str(p[3]) + ##
                  '\n  0\nTEXT\n  8\n' + layer_id +
-                 '\n  1\n' + str(p[0]) + 
-                 '\n 10\n' + str(p[1]) + 
-                 '\n 20\n' + str(p[2]) + 
-                 '\n 30\n' + str(p[3]) +
-                 '\n 40\n10\n')
+                 '\n  1\n' + str(p[0]) + # text
+                 '\n 10\n' + str(p[1]) + ##
+                 '\n 20\n' + str(p[2]) + ## coord
+                 '\n 30\n' + str(p[3]) + ##
+                 '\n 40\n' + label_size + # label text size
+                 '\n  0\nTEXT\n  8\n' + layer_h +
+                 '\n  1\n' + str(p[3]) + # text
+                 '\n 10\n' + str(p[1]) + ##
+                 '\n 20\n' + str(p[2]) + ## coord
+                 '\n 30\n' + str(p[3]) + ##
+                 '\n 40\n' + label_size + '\n') # label text size
     pf.write('  0\nENDSEC\n')
     pf.write('  0\nEOF\n')
     pf.close()
